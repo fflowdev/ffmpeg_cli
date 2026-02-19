@@ -1,5 +1,4 @@
 import 'package:ffmpeg_cli/ffmpeg_cli.dart';
-import 'package:ffmpeg_cli/src/ffmpeg/video_size.dart';
 
 /// Resize the input video
 ///
@@ -14,10 +13,10 @@ class ScaleFilter implements Filter {
     this.param0,
     this.param1,
     this.size,
-  })  : assert(width == null || width >= -1),
-        assert(height == null || height >= -1),
-        assert(eval == null || eval == 'init' || eval == 'frame'),
-        assert(interl == null || interl == 1 || interl == 0 || interl == -1);
+  }) : assert(width == null || width >= -1),
+       assert(height == null || height >= -1),
+       assert(eval == null || eval == 'init' || eval == 'frame'),
+       assert(interl == null || interl == 1 || interl == 0 || interl == -1);
 
   /// Width for scale
   final int? width;

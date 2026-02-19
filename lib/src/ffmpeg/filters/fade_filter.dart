@@ -10,8 +10,8 @@ class FadeFilter implements Filter {
     this.startTime,
     this.duration,
     this.color,
-  })  : assert(type == 'in' || type == 'out'),
-        assert(alpha == null || alpha == 0 || alpha == 1);
+  }) : assert(type == 'in' || type == 'out'),
+       assert(alpha == null || alpha == 0 || alpha == 1);
 
   /// Effect type (default is in)
   final String? type;
@@ -91,7 +91,7 @@ enum AFadeCurve {
   losi,
   sinc,
   isinc,
-  nofade
+  nofade,
 }
 
 /// Fades a given audio stream.
@@ -121,7 +121,7 @@ class AFadeFilter implements Filter {
       'type=$type',
       if (startTime != null) 'start_time=${startTime!.toSeconds()}',
       if (duration != null) 'duration=${duration!.toSeconds()}',
-      if (curve != null) 'curve=$curve'
+      if (curve != null) 'curve=$curve',
     ];
 
     return 'afade=${argList.join(':')}';

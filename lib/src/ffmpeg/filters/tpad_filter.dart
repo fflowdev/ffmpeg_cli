@@ -11,8 +11,8 @@ class TPadFilter implements Filter {
     this.startMode,
     this.stopMode,
     this.color,
-  })  : assert(startMode == null || startMode == 'add' || startMode == 'clone'),
-        assert(stopMode == null || stopMode == 'add' || stopMode == 'clone');
+  }) : assert(startMode == null || startMode == 'add' || startMode == 'clone'),
+       assert(stopMode == null || stopMode == 'add' || stopMode == 'clone');
 
   /// Number of frames to add before video content.
   final int? start;

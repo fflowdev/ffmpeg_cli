@@ -3,11 +3,7 @@ import 'package:ffmpeg_cli/src/time.dart';
 
 /// Reduces a given video stream to the segment between `start` and `end`.
 class TrimFilter implements Filter {
-  const TrimFilter({
-    this.start,
-    this.end,
-    this.duration,
-  });
+  const TrimFilter({this.start, this.end, this.duration});
 
   /// The time of the start of the kept section
   final Duration? start;
@@ -36,11 +32,7 @@ class TrimFilter implements Filter {
 
 /// Reduces a given audio stream to the segment between `start` and `end`.
 class ATrimFilter implements Filter {
-  const ATrimFilter({
-    this.start,
-    this.end,
-    this.duration,
-  });
+  const ATrimFilter({this.start, this.end, this.duration});
 
   /// The time of the start of the kept section
   final Duration? start;

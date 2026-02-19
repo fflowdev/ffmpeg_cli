@@ -46,38 +46,31 @@ class FfmpegBuilder {
     // FFMPEG expects.
     final videoId = hasVideo
         ? hasVideo && hasAudio
-            ? '[${_inputs.length}:v]'
-            : '[${_inputs.length}]'
+              ? '[${_inputs.length}:v]'
+              : '[${_inputs.length}]'
         : null;
     final audioId = hasAudio
         ? hasVideo && hasAudio
-            ? '[${_inputs.length}:a]'
-            : '[${_inputs.length}]'
+              ? '[${_inputs.length}:a]'
+              : '[${_inputs.length}]'
         : null;
 
     _inputs.putIfAbsent(
-        input,
-        () => FfmpegStream(
-              videoId: videoId,
-              audioId: audioId,
-            ));
+      input,
+      () => FfmpegStream(videoId: videoId, audioId: audioId),
+    );
 
     return _inputs[input]!;
   }
 
   /// Adds a virtual video input asset with the given [width] and [height],
   /// which can be used to fill up time when no other video is available.
-  FfmpegStream addNullVideo({
-    required int width,
-    required int height,
-  }) {
+  FfmpegStream addNullVideo({required int width, required int height}) {
     final input = FfmpegInput.virtualDevice('nullsrc=s=${width}x$height');
     final stream = _inputs.putIfAbsent(
-        input,
-        () => FfmpegStream(
-              videoId: '[${_inputs.length}]',
-              audioId: null,
-            ));
+      input,
+      () => FfmpegStream(videoId: '[${_inputs.length}]', audioId: null),
+    );
     return stream;
   }
 
@@ -86,33 +79,27 @@ class FfmpegBuilder {
   FfmpegStream addNullAudio() {
     final input = FfmpegInput.virtualDevice('anullsrc=sample_rate=48000');
     final stream = _inputs.putIfAbsent(
-        input,
-        () => FfmpegStream(
-              videoId: null,
-              audioId: '[${_inputs.length}]',
-            ));
+      input,
+      () => FfmpegStream(videoId: null, audioId: '[${_inputs.length}]'),
+    );
     return stream;
   }
 
   FfmpegStream addVideoVirtualDevice(String device) {
     final input = FfmpegInput.virtualDevice(device);
     final stream = _inputs.putIfAbsent(
-        input,
-        () => FfmpegStream(
-              videoId: '[${_inputs.length}]',
-              audioId: null,
-            ));
+      input,
+      () => FfmpegStream(videoId: '[${_inputs.length}]', audioId: null),
+    );
     return stream;
   }
 
   FfmpegStream addAudioVirtualDevice(String device) {
     final input = FfmpegInput.virtualDevice(device);
     final stream = _inputs.putIfAbsent(
-        input,
-        () => FfmpegStream(
-              videoId: null,
-              audioId: '[${_inputs.length}]',
-            ));
+      input,
+      () => FfmpegStream(videoId: null, audioId: '[${_inputs.length}]'),
+    );
     return stream;
   }
 
@@ -157,9 +144,7 @@ class FfmpegBuilder {
       ffmpegPath: ffmpegPath,
       inputs: _inputs.keys.toList(),
       args: args,
-      filterGraph: FilterGraph(
-        chains: _filterChains,
-      ),
+      filterGraph: FilterGraph(chains: _filterChains),
       outputFilepath: outputFilepath,
     );
   }

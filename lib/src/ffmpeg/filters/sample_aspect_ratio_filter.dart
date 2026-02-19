@@ -2,9 +2,7 @@ import 'package:ffmpeg_cli/src/ffmpeg/ffmpeg_command.dart';
 
 /// Sets the Sample Aspect Ratio for the filter output video.
 class SetSarFilter implements Filter {
-  SetSarFilter({
-    required this.sar,
-  }) : assert(sar.isNotEmpty);
+  SetSarFilter({required this.sar}) : assert(sar.isNotEmpty);
 
   /// The input sample aspect ratio
   final String sar;

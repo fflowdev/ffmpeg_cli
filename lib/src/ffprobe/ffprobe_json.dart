@@ -12,12 +12,10 @@ String? _durationToJson(Duration? duration) => duration?.toStandardFormat();
 
 @JsonSerializable()
 class FfprobeResult {
-  factory FfprobeResult.fromJson(Map<String, dynamic> json) => _$FfprobeResultFromJson(json);
+  factory FfprobeResult.fromJson(Map<String, dynamic> json) =>
+      _$FfprobeResultFromJson(json);
 
-  FfprobeResult({
-    this.streams,
-    this.format,
-  });
+  FfprobeResult({this.streams, this.format});
 
   final List<Stream>? streams;
   final Format? format;
@@ -26,7 +24,7 @@ class FfprobeResult {
 
   @override
   String toString() {
-    return 'FfprobeResult:\n' + const JsonEncoder.withIndent('  ').convert(toJson());
+    return 'FfprobeResult:\n${const JsonEncoder.withIndent('  ').convert(toJson())}';
   }
 }
 
@@ -130,7 +128,8 @@ class Stream {
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Disposition {
-  factory Disposition.fromJson(Map<String, dynamic> json) => _$DispositionFromJson(json);
+  factory Disposition.fromJson(Map<String, dynamic> json) =>
+      _$DispositionFromJson(json);
 
   Disposition({
     this.defaultCount,

@@ -13,8 +13,13 @@ class OverlayFilter implements Filter {
     this.overlayH,
     this.inputFrameCount,
     this.timestamp,
-  })  : assert(shortest == null || shortest == 1 || shortest == 0),
-        assert(eofAction == null || eofAction == 'repeat' || eofAction == 'endall' || eofAction == 'pass');
+  }) : assert(shortest == null || shortest == 1 || shortest == 0),
+       assert(
+         eofAction == null ||
+             eofAction == 'repeat' ||
+             eofAction == 'endall' ||
+             eofAction == 'pass',
+       );
 
   /// x-position of the image taken from the top left corner
   final int? x;
@@ -50,7 +55,7 @@ class OverlayFilter implements Filter {
       if (overlayW != null) "overlay_w=$overlayW",
       if (overlayH != null) "overlay_h=$overlayH",
       if (inputFrameCount != null) "n=$inputFrameCount",
-      if (timestamp != null) "t=${timestamp!.inSeconds}"
+      if (timestamp != null) "t=${timestamp!.inSeconds}",
     ];
     return 'overlay=${properties.join(":")}';
   }

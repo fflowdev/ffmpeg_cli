@@ -7,9 +7,9 @@ class ConcatFilter implements Filter {
     this.segmentCount,
     required this.outputVideoStreamCount,
     required this.outputAudioStreamCount,
-  })  : assert(segmentCount == null || segmentCount > 0),
-        assert(outputVideoStreamCount >= 0),
-        assert(outputAudioStreamCount >= 0);
+  }) : assert(segmentCount == null || segmentCount > 0),
+       assert(outputVideoStreamCount >= 0),
+       assert(outputAudioStreamCount >= 0);
 
   /// Number of segments (defaults to 2)
   final int? segmentCount;

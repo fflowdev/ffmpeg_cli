@@ -6,9 +6,7 @@ import 'package:ffmpeg_cli/src/ffmpeg/ffmpeg_command.dart';
 /// to the number of inputs, e.g., 1/2 volume for 2 inputs, 1/3 volume for 3
 /// inputs.
 class AMixFilter implements Filter {
-  const AMixFilter({
-    this.inputCount,
-  });
+  const AMixFilter({this.inputCount});
 
   /// Number of inputs (defaults to 2)
   final int? inputCount;

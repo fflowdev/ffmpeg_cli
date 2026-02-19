@@ -11,10 +11,7 @@ class Ffmpeg {
   /// Executes the given [command].
   Future<Process> run(FfmpegCommand command) {
     final cli = command.toCli();
-    return Process.start(
-      cli.executable,
-      cli.args,
-    );
+    return Process.start(cli.executable, cli.args);
   }
 }
 
@@ -74,11 +71,11 @@ class FfmpegCommand {
       executable: ffmpegPath ?? 'ffmpeg',
       args: [
         for (final input in inputs) ...input.args,
-        for (final arg in args) ...["-${arg.name}", if (arg.value != null) arg.value!],
-        if (filterGraph != null) ...[
-          '-filter_complex',
-          filterGraph!.toCli(),
+        for (final arg in args) ...[
+          "-${arg.name}",
+          if (arg.value != null) arg.value!,
         ],
+        if (filterGraph != null) ...['-filter_complex', filterGraph!.toCli()],
         outputFilepath,
       ],
     );
@@ -117,7 +114,8 @@ class FfmpegInput {
   /// Configures an FFMPEG input for a virtual device.
   //
   /// See the FFMPEG docs for more information.
-  FfmpegInput.virtualDevice(String device) : args = ['-f', 'lavfi', '-i', device];
+  FfmpegInput.virtualDevice(String device)
+    : args = ['-f', 'lavfi', '-i', device];
 
   const FfmpegInput(this.args);
 
@@ -131,7 +129,10 @@ class FfmpegInput {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is FfmpegInput && runtimeType == other.runtimeType && toCli() == other.toCli();
+      identical(this, other) ||
+      other is FfmpegInput &&
+          runtimeType == other.runtimeType &&
+          toCli() == other.toCli();
 
   @override
   int get hashCode => toCli().hashCode;
@@ -139,12 +140,10 @@ class FfmpegInput {
 
 /// An argument that is passed to the FFMPEG CLI command.
 class CliArg {
-  CliArg.logLevel(LogLevel level) : this(name: 'loglevel', value: level.toFfmpegString());
+  CliArg.logLevel(LogLevel level)
+    : this(name: 'loglevel', value: level.toFfmpegString());
 
-  const CliArg({
-    required this.name,
-    this.value,
-  });
+  const CliArg({required this.name, this.value});
 
   final String name;
   final String? value;
@@ -158,9 +157,7 @@ class CliArg {
 /// FFMPEG filter graph syntax reference:
 /// http://ffmpeg.org/ffmpeg-filters.html#Filtergraph-syntax-1
 class FilterGraph {
-  const FilterGraph({
-    required this.chains,
-  });
+  const FilterGraph({required this.chains});
 
   final List<FilterChain> chains;
 
@@ -215,10 +212,11 @@ class FilterChain {
 /// outputs from one filter chain are used as inputs in another filter
 /// chain. To that end, these streams are represented by this class.
 class FfmpegStream {
-  const FfmpegStream({
-    this.videoId,
-    this.audioId,
-  }) : assert(videoId != null || audioId != null, "FfmpegStream must include a videoId, or an audioId.");
+  const FfmpegStream({this.videoId, this.audioId})
+    : assert(
+        videoId != null || audioId != null,
+        "FfmpegStream must include a videoId, or an audioId.",
+      );
 
   /// Handle to a video stream, e.g., "[0:v]".
   final String? videoId;
@@ -269,10 +267,7 @@ abstract class Filter {
 
 /// A command that can be passed to a `Process` for execution.
 class CliCommand {
-  const CliCommand({
-    required this.executable,
-    required this.args,
-  });
+  const CliCommand({required this.executable, required this.args});
 
   /// The name of the executable.
   ///
