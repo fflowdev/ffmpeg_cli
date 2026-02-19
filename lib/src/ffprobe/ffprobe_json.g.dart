@@ -6,8 +6,7 @@ part of 'ffprobe_json.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-FfprobeResult _$FfprobeResultFromJson(Map<String, dynamic> json) =>
-    FfprobeResult(
+Data _$DataFromJson(Map<String, dynamic> json) => Data(
       streams: (json['streams'] as List<dynamic>?)
           ?.map((e) => Stream.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -16,14 +15,13 @@ FfprobeResult _$FfprobeResultFromJson(Map<String, dynamic> json) =>
           : Format.fromJson(json['format'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$FfprobeResultToJson(FfprobeResult instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
       'streams': instance.streams,
       'format': instance.format,
     };
 
 Stream _$StreamFromJson(Map<String, dynamic> json) => Stream(
-      index: json['index'] as int?,
+      index: (json['index'] as num?)?.toInt(),
       codeName: json['code_name'] as String?,
       codecLongName: json['codec_long_name'] as String?,
       profile: json['profile'] as String?,
@@ -31,28 +29,28 @@ Stream _$StreamFromJson(Map<String, dynamic> json) => Stream(
       codecTimeBase: json['codec_time_base'] as String?,
       codecTagString: json['codec_tag_string'] as String?,
       codecTag: json['codec_tag'] as String?,
-      width: json['width'] as int?,
-      height: json['height'] as int?,
-      codecWidth: json['codec_width'] as int?,
-      codecHeight: json['codec_height'] as int?,
-      closedCaptions: json['closed_captions'] as int?,
-      hasBFrames: json['has_b_frames'] as int?,
+      width: (json['width'] as num?)?.toInt(),
+      height: (json['height'] as num?)?.toInt(),
+      codecWidth: (json['codec_width'] as num?)?.toInt(),
+      codecHeight: (json['codec_height'] as num?)?.toInt(),
+      closedCaptions: (json['closed_captions'] as num?)?.toInt(),
+      hasBFrames: (json['has_b_frames'] as num?)?.toInt(),
       pixFmt: json['pix_fmt'] as String?,
-      level: json['level'] as int?,
+      level: (json['level'] as num?)?.toInt(),
       colorRange: json['color_range'] as String?,
       colorSpace: json['color_space'] as String?,
       colorTransfer: json['color_transfer'] as String?,
       colorPrimaries: json['color_primaries'] as String?,
       chromaLocation: json['chroma_location'] as String?,
-      refs: json['refs'] as int?,
+      refs: (json['refs'] as num?)?.toInt(),
       isAvc: json['is_avc'] as String?,
       nalLengthSize: json['nal_length_size'] as String?,
       rFrameRate: json['r_frame_rate'] as String?,
       avgFrameRate: json['avg_frame_rate'] as String?,
       timeBase: json['time_base'] as String?,
-      startPts: json['start_pts'] as int?,
+      startPts: (json['start_pts'] as num?)?.toInt(),
       startTime: _durationFromJson(json['start_time'] as String?),
-      durationTs: json['duration_ts'] as int?,
+      durationTs: (json['duration_ts'] as num?)?.toInt(),
       duration: _durationFromJson(json['duration'] as String?),
       bitRate: json['bit_rate'] as String?,
       bitsPerRawSample: json['bits_per_raw_sample'] as String?,
@@ -66,9 +64,9 @@ Stream _$StreamFromJson(Map<String, dynamic> json) => Stream(
           : Tags.fromJson(json['tags'] as Map<String, dynamic>),
       sampleFmt: json['sample_fmt'] as String?,
       sampleRate: json['sample_rate'] as String?,
-      channels: json['channels'] as int?,
+      channels: (json['channels'] as num?)?.toInt(),
       channelLayout: json['channel_layout'] as String?,
-      bitsPerSample: json['bits_per_sample'] as int?,
+      bitsPerSample: (json['bits_per_sample'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$StreamToJson(Stream instance) => <String, dynamic>{
@@ -117,18 +115,18 @@ Map<String, dynamic> _$StreamToJson(Stream instance) => <String, dynamic>{
     };
 
 Disposition _$DispositionFromJson(Map<String, dynamic> json) => Disposition(
-      defaultCount: json['default'] as int?,
-      dub: json['dub'] as int?,
-      original: json['original'] as int?,
-      comment: json['comment'] as int?,
-      lyrics: json['lyrics'] as int?,
-      karaoke: json['karaoke'] as int?,
-      forced: json['forced'] as int?,
-      hearingImpaired: json['hearing_impaired'] as int?,
-      visualImpaired: json['visual_impaired'] as int?,
-      cleanEffects: json['clean_effects'] as int?,
-      attachedPic: json['attached_pic'] as int?,
-      timedThumbnails: json['timed_thumbnails'] as int?,
+      defaultCount: (json['default'] as num?)?.toInt(),
+      dub: (json['dub'] as num?)?.toInt(),
+      original: (json['original'] as num?)?.toInt(),
+      comment: (json['comment'] as num?)?.toInt(),
+      lyrics: (json['lyrics'] as num?)?.toInt(),
+      karaoke: (json['karaoke'] as num?)?.toInt(),
+      forced: (json['forced'] as num?)?.toInt(),
+      hearingImpaired: (json['hearing_impaired'] as num?)?.toInt(),
+      visualImpaired: (json['visual_impaired'] as num?)?.toInt(),
+      cleanEffects: (json['clean_effects'] as num?)?.toInt(),
+      attachedPic: (json['attached_pic'] as num?)?.toInt(),
+      timedThumbnails: (json['timed_thumbnails'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$DispositionToJson(Disposition instance) =>
@@ -149,15 +147,15 @@ Map<String, dynamic> _$DispositionToJson(Disposition instance) =>
 
 Format _$FormatFromJson(Map<String, dynamic> json) => Format(
       filename: json['filename'] as String?,
-      nbStreams: json['nb_streams'] as int?,
-      nbPrograms: json['nb_programs'] as int?,
+      nbStreams: (json['nb_streams'] as num?)?.toInt(),
+      nbPrograms: (json['nb_programs'] as num?)?.toInt(),
       formatName: json['format_name'] as String?,
       formatLongName: json['format_long_name'] as String?,
       startTime: _durationFromJson(json['start_time'] as String?),
       duration: _durationFromJson(json['duration'] as String?),
       size: json['size'] as String?,
       bitRate: json['bit_rate'] as String?,
-      probeScore: json['probe_score'] as int?,
+      probeScore: (json['probe_score'] as num?)?.toInt(),
       tags: json['tags'] == null
           ? null
           : Tags.fromJson(json['tags'] as Map<String, dynamic>),

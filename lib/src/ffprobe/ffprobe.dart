@@ -11,10 +11,11 @@ import 'ffprobe_json.dart';
 class Ffprobe {
   /// Runs the FFMPEG `ffprobe` CLI command against the given [filepath].
   static Future<FfprobeResult> run(
+    String ffprobePath,
     String filepath, {
     String? workingDir,
   }) async {
-    final result = await Process.run('ffprobe', [
+    final result = await Process.run(ffprobePath, [
       '-v',
       'quiet',
       '-print_format',
@@ -25,8 +26,7 @@ class Ffprobe {
     ]);
 
     if (result.exitCode != 0) {
-      print('Failed to run ffprobe for "$filepath"');
-      throw Exception(
+      return Failure(
         'ffprobe returned error: ${result.exitCode}\n${result.stderr}',
       );
     }
@@ -34,10 +34,10 @@ class Ffprobe {
     if (result.stdout == null ||
         result.stdout is! String ||
         (result.stdout as String).isEmpty) {
-      throw Exception('ffprobe did not output expected data: ${result.stdout}');
+      return Failure('ffprobe did not output expected data: ${result.stdout}');
     }
 
     final json = jsonDecode(result.stdout);
-    return FfprobeResult.fromJson(json);
+    return Data.fromJson(json);
   }
 }

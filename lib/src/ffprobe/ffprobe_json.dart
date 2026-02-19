@@ -10,21 +10,33 @@ Duration? _durationFromJson(String? durationString) =>
 
 String? _durationToJson(Duration? duration) => duration?.toStandardFormat();
 
-@JsonSerializable()
-class FfprobeResult {
-  factory FfprobeResult.fromJson(Map<String, dynamic> json) =>
-      _$FfprobeResultFromJson(json);
+sealed class FfprobeResult {
+  const FfprobeResult();
+}
 
-  FfprobeResult({this.streams, this.format});
+class Failure extends FfprobeResult {
+  const Failure(this.error);
+
+  final String error;
+
+  @override
+  String toString() => 'FfprobeResult Failure: $error';
+}
+
+@JsonSerializable()
+class Data extends FfprobeResult {
+  factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
+
+  Data({this.streams, this.format});
 
   final List<Stream>? streams;
   final Format? format;
 
-  Map<String, dynamic> toJson() => _$FfprobeResultToJson(this);
+  Map<String, dynamic> toJson() => _$DataToJson(this);
 
   @override
   String toString() {
-    return 'FfprobeResult:\n${const JsonEncoder.withIndent('  ').convert(toJson())}';
+    return 'Data:\n${const JsonEncoder.withIndent('  ').convert(toJson())}';
   }
 }
 
